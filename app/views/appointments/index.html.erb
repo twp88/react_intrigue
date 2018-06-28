@@ -1,0 +1,29 @@
+<h1>React Calender</h1>
+<h2>Appointments</h2>
+<h3>Make a new Appointment</h3>
+
+<%= form_for @appointment do |a| %>
+  <%= a.text_field :title %>
+  <%= a.text_field :appt_time %>
+  <%= a.submit 'Make Appointment' %>
+<% end %>
+
+<% if @appointments.any? %>
+  <% @appointments.each do |a| %>
+    <h3><%= a.title %></h3>
+    <p><%= a.appt_time %></p>
+  <% end %>
+<% else %>
+  <h3><%= "Ain't nothing to see here" %></h3>
+<% end %>
+
+<style>
+  body {
+    width:500px;
+    margin:auto;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    padding-bottom: 200px;
+  }
+</style>
