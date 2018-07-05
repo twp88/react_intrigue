@@ -1,7 +1,14 @@
 var Appointments = React.createClass({
   render: function() {
    return (
-     <h1>CalReact</h1>
+      <div>
+        <AppointmentForm />
+        {this.props.appointments.map(function(appointment) {
+          return (
+            <Appointment appointment={appointment} />
+          )
+        })}
+      </div>
    )
   }
-})
+});

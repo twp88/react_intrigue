@@ -1,0 +1,9 @@
+<div id="appointments">
+  <% if @appointments.any? %>
+    <% @appointments.each do |a| %>
+      <h3><%= a.title %></h3>
+      <p><%= a.appt_time %></p>
+    <% end %>
+  <% else %>
+    <h3><%= "Ain't nothing to see here" %></h3>
+  <% end %>
