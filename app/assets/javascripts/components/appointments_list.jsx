@@ -1,14 +1,13 @@
-var Appointments = React.createClass({
+var AppointmentsList = React.createClass({
   render: function() {
-   return (
+    return (
       <div>
-        <AppointmentForm />
         {this.props.appointments.map(function(appointment) {
           return (
             <Appointment appointment={appointment} />
           )
         })}
       </div>
-   )
+    )
   }
 });
