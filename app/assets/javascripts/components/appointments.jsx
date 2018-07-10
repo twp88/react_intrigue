@@ -15,10 +15,11 @@ var Appointments = React.createClass({
     $.post('/appointments',
       {appointment: appointment}).done(function(data){
         this.addNewAppointment(data);
-      });
+      }.bind(this));
   },
   addNewAppointment: function(appointment) {
-    var appointments = React.addons.update(this.state.appointments, { $push: [appointment]});
+    var appointments = React.addons.update(this.state.appointments,
+    { $push: [appointment]});
     this.setState({appointments: appointments})
   },
   render: function() {
@@ -26,7 +27,7 @@ var Appointments = React.createClass({
       <div>
         <AppointmentForm input_title={this.state.ting_title}
         input_appt_data={this.state.appt_data}
-        onUserInput={this.handleUserInput()}
+        onUserInput={this.handleUserInput}
         onFormSubmit={this.handleFormSubmit}/>
 
         <AppointmentsList appointments={this.state.appointments} />
