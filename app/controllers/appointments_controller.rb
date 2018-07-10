@@ -5,12 +5,13 @@ class AppointmentsController < ApplicationController
   end
 
   def create
-    puts "HI1"
-    @appointment = Appointment.create(appointment_params)
-    puts "HI2"
-    @appointments = Appointment.order('appt_time ASC')
-    puts "HI3"
-    redirect_to '/'
+    @appointment = Appointment.new(appointment_params)
+
+    if @appointment.save
+      render json: @appointment
+    else
+      render json: @appointment.errors, status: :unprocessable_entity
+    end
   end
 
   private
