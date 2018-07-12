@@ -4,6 +4,8 @@ var AppointmentsList = React.createClass({
       <div>
         {this.props.appointments.map(function(appointment) {
           return (
+            // This component cycles through all of the existing appointments
+            // passing each one to the appointment component
             <Appointment appointment={appointment} />
           )
         })}
