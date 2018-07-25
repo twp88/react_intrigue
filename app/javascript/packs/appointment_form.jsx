@@ -1,11 +1,15 @@
-class AppointmentForm extends React.Component {
+import React from 'react'
+import Datetime from 'react-datetime'
+import 'react-datetime/css/react-datetime'
+
+export default class AppointmentForm extends React.Component {
   // this is the callback function that gets called for the form onSubmit function.
   // It takes e which stands fo event.
   handleChange(e) {
     const name = e.target.name;
     // First it sets up the variable name which takes the value of name from the event
     // i.e. title
-    obj = {};
+    const obj = {};
     obj[name] = e.target.value;
     // It then saves this variable as the name of a value in an empty object
     // (ruby would be a hash) and assigns it a value i.e. the actual title string
@@ -47,7 +51,6 @@ class AppointmentForm extends React.Component {
     return (
       // wrapping again in div tags
       <div>
-        <h2><Label label='Do whatever you want' /></h2>
         <h2>Make a new appointment</h2>
         <form onSubmit={(event) => this.handleSubmit(event)}>
         // the onSubmit function is handleSubmit
