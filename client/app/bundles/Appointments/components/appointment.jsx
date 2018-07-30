@@ -1,6 +1,7 @@
 import React from 'react'
 import moment from 'moment'
-import { formatDate } from './utils'
+import { formatDate } from '../utils/format'
+
 
 export const Appointment = ({appointment}) =>
   <div className='appointment'>

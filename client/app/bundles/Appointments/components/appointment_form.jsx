@@ -1,6 +1,5 @@
 import React from 'react'
 import Datetime from 'react-datetime'
-import 'react-datetime/css/react-datetime'
 
 export default class AppointmentForm extends React.Component {
   // this is the callback function that gets called for the form onSubmit function.
