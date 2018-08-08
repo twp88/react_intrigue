@@ -10,14 +10,15 @@ export default class AppointmentForm extends React.Component {
     // i.e. title
     const obj = {};
     obj[name] = e.target.value;
+    console.log('This is value');
+    console.log(e.target.value);
+
     // It then saves this variable as the name of a value in an empty object
     // (ruby would be a hash) and assigns it a value i.e. the actual title string
-    console.log(obj);
-    console.log(this.props.onUserInput);
     // It then passes this object to another function that has been passed to this
     // component as a prop from the appointments component. In appointments this
     // function is known as handleUserInput
-    this.props.onUserInput(obj);
+    this.props.onUserInputName(e.target.value);
     // this changes the state in the appointments component, which is what
     // gets rendered after the form is submitted
   }
@@ -33,13 +34,9 @@ export default class AppointmentForm extends React.Component {
 
   setAppTime(e) {
     // this has a similiar process to the function handleChange
-    const name = 'appt_data';
-    const obj ={};
     // the next line is the only difference, as it converts the numeric value
     // into a date
-    if(obj[name] = e.toDate()) {
-      this.props.onUserInput(obj);
-    }
+    this.props.onUserInputDate(e.toDate());
   }
 
   render () {
@@ -54,7 +51,7 @@ export default class AppointmentForm extends React.Component {
         <form onSubmit={(event) => this.handleSubmit(event)}>
         // the onSubmit function is handleSubmit
 
-          <input name='title' placeholder= 'Appointment'
+          <input name='ting_title' placeholder= 'Appointment'
           // input field
             value={this.props.input_title}
             // default value

@@ -12,20 +12,29 @@ export default class Appointments extends React.Component {
     // in this component
     this.state = {
       appointments: this.props.appointments,
-      ting_title: 'Team standup meeting',
+      ting_title: '',
       appt_data: 'Tomorrow at 9am',
     }
-    this.handleUserInput = this.handleUserInput.bind(this);
+    this.handleUserInputName = this.handleUserInputName.bind(this);
+    this.handleUserInputDate = this.handleUserInputDate.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.addNewAppointment = this.addNewAppointment.bind(this);
   }
 
-  handleUserInput(obj) {
+  handleUserInputName(value) {
     // this callback function takes an object and sets the state of this object
     // to whatever it is passed. Notice that the point of truth for appointments
     // seems to this component. Most of what will get sent will be in the form
     // of a js object i.e. obj['appt_data']='thing'
-    this.setState(obj);
+    this.setState({
+      ting_title: value
+    })
+  }
+
+  handleUserInputDate(value) {
+    this.setState({
+      appt_data: value
+    })
   }
 
   handleFormSubmit() {
@@ -76,7 +85,8 @@ export default class Appointments extends React.Component {
         // Below are two functions which are passed as props to the AppointmentForm
         // Note that they are renamed, and that they use this. showing that the scope
         // is for this Appointments component
-        onUserInput={(obj) => this.handleUserInput(obj)}
+        onUserInputName={(obj) => this.handleUserInputName(obj)}
+        onUserInputDate={(obj) => this.handleUserInputDate(obj)}
         onFormSubmit={() => this.handleFormSubmit()}/>
 
         // This is where AppointmentsList is passed the appointments from the state.
