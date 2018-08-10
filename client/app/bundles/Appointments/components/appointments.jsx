@@ -4,6 +4,7 @@ import AppointmentForm from './appointment_form'
 import Datetime from 'react-datetime'
 import update from 'immutability-helper'
 import { AppointmentsList } from './appointments_list'
+import { FormErrors } from './FormErrors'
 
 export default class Appointments extends React.Component {
   constructor(props) {
@@ -14,10 +15,12 @@ export default class Appointments extends React.Component {
       appointments: this.props.appointments,
       ting_title: '',
       appt_data: 'Tomorrow at 9am',
+      formErrors: {}
     }
     this.handleUserInput = this.handleUserInput.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.addNewAppointment = this.addNewAppointment.bind(this);
+    this.resetFormErrors = this.resetFormErrors.bind(this);
   }
 
   handleUserInput(value) {
@@ -36,6 +39,10 @@ export default class Appointments extends React.Component {
     }
   }
 
+  resetFormErrors() {
+    this.setState({formErrors: {}})
+  }
+
   handleFormSubmit() {
     // this is the function which deals with submitting a new appointment to the
     // backend.
@@ -49,7 +56,12 @@ export default class Appointments extends React.Component {
       // case it will call the function addNewAppointment with the argument data
       // which is presumably the newly minted appointment
         this.addNewAppointment(data);
-      });
+        this.resetFormErrors();
+      })
+      .fail((response) => {
+        console.log(response)
+        this.setState({formErrors: response.responseJSON})
+      })
   }
 
   addNewAppointment(appointment) {
@@ -79,6 +91,7 @@ export default class Appointments extends React.Component {
         //
         // It also uses functions defined above which are within
         // the scope of this component.
+        <FormErrors formErrors={this.state.formErrors} />
         <AppointmentForm input_title={this.state.ting_title}
         input_appt_data={this.state.appt_data}
         // Below are two functions which are passed as props to the AppointmentForm
