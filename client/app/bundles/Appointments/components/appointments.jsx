@@ -15,7 +15,8 @@ export default class Appointments extends React.Component {
       appointments: this.props.appointments,
       ting_title: '',
       appt_data: 'Tomorrow at 9am',
-      formErrors: {}
+      formErrors: {},
+      formValid: true
     }
     this.handleUserInput = this.handleUserInput.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
@@ -29,14 +30,13 @@ export default class Appointments extends React.Component {
     // seems to this component. Most of what will get sent will be in the form
     // of a js object i.e. obj['appt_data']='thing'
     if (typeof value === "string") {
-      this.setState({
-        ting_title: value
-      })
-    } else {
-      this.setState({
-        appt_data: value
-      })
-    }
+      this.setState({ting_title: value}, this.validateForm)
+    } else {this.setState({appt_data: value}, this.validateForm)}
+  }
+
+  validateForm() {
+    console.log("YOYOYOY")
+    this.setState({formValid: this.state.ting_title.length < 3})
   }
 
   resetFormErrors() {
@@ -94,6 +94,7 @@ export default class Appointments extends React.Component {
         <FormErrors formErrors={this.state.formErrors} />
         <AppointmentForm input_title={this.state.ting_title}
         input_appt_data={this.state.appt_data}
+        formValid={this.state.formValid}
         // Below are two functions which are passed as props to the AppointmentForm
         // Note that they are renamed, and that they use this. showing that the scope
         // is for this Appointments component
