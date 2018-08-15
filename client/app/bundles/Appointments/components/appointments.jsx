@@ -36,7 +36,7 @@ export default class Appointments extends React.Component {
 
   validateForm() {
     console.log("YOYOYOY")
-    this.setState({formValid: this.state.ting_title.length < 3})
+    this.setState({formValid: this.state.ting_title.trim().length < 2})
   }
 
   resetFormErrors() {
@@ -92,8 +92,8 @@ export default class Appointments extends React.Component {
         // It also uses functions defined above which are within
         // the scope of this component.
         <FormErrors formErrors={this.state.formErrors} />
-        <AppointmentForm input_title={this.state.ting_title}
-        input_appt_data={this.state.appt_data}
+        <AppointmentForm title={this.state.ting_title}
+        appt_data={this.state.appt_data}
         formValid={this.state.formValid}
         // Below are two functions which are passed as props to the AppointmentForm
         // Note that they are renamed, and that they use this. showing that the scope

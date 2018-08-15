@@ -1,10 +1,11 @@
-import React from 'react'
-import Datetime from 'react-datetime'
+import React from 'react';
+import Datetime from 'react-datetime';
+import moment from 'moment';
 
 export default class AppointmentForm extends React.Component {
   // this is the callback function that gets called for the form onSubmit function.
   // It takes e which stands fo event.
-  handleChange(e) {
+  handleChange = (e) => {
     // It then saves this variable as the name of a value in an empty object
     // (ruby would be a hash) and assigns it a value i.e. the actual title string
     // It then passes this object to another function that has been passed to this
@@ -16,7 +17,7 @@ export default class AppointmentForm extends React.Component {
   }
 
   // this is the function used to help save the appointment to the backend
-  handleSubmit(e) {
+  handleSubmit = (e) => {
     //this prevents the default value from being saved (it's not doing so however)
     e.preventDefault();
     this.props.onFormSubmit();
@@ -24,7 +25,7 @@ export default class AppointmentForm extends React.Component {
     // sends a jquery post request to a rails controller action (endpoint)
   }
 
-  setAppTime(e) {
+  setAppTime = (e) => {
     // this has a similiar process to the function handleChange
     // the next line is the only difference, as it converts the numeric value
     // into a date
@@ -40,21 +41,21 @@ export default class AppointmentForm extends React.Component {
       // wrapping again in div tags
       <div>
         <h2>Make a new appointment</h2>
-        <form onSubmit={(event) => this.handleSubmit(event)}>
+        <form onSubmit={this.handleSubmit}>
         // the onSubmit function is handleSubmit
 
           <input name='ting_title' placeholder= 'Appointment'
           // input field
-            value={this.props.input_title}
+            value={this.props.title}
             // default value
-            onChange={(event) => this.handleChange(event)} />
+            onChange={this.handleChange} />
             // function to handle change
 
           <Datetime input={false} open={true}
           // An element which is a 3rd party react component
             inputProps={inputProps}
-            value={this.props.appt_data}
-            onChange={(event) => this.setAppTime(event)}/>
+            value={moment(this.props.appt_data)}
+            onChange={this.setAppTime}/>
 
           <input type='submit' value='Make Appointment'
             className='submit-button'
