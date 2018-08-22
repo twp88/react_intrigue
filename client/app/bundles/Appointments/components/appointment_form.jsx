@@ -59,7 +59,7 @@ export default class AppointmentForm extends React.Component {
 
           <input type='submit' value='Make Appointment'
             className='submit-button'
-            disabled={this.props.formValid} />
+            disabled={!this.props.formValid} />
           // note the use of className for the purposes of css styling, not simply class
         </form>
       </div>

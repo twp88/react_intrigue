@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import AppointmentForm from './appointment_form'
 import Datetime from 'react-datetime'
 import update from 'immutability-helper'
+import moment from 'moment'
 import { AppointmentsList } from './appointments_list'
 import { FormErrors } from './FormErrors'
 
@@ -14,14 +15,10 @@ export default class Appointments extends React.Component {
     this.state = {
       appointments: this.props.appointments,
       ting_title: '',
-      appt_data: 'Tomorrow at 9am',
+      appt_data: '',
       formErrors: {},
-      formValid: true
+      formValid: false
     }
-    this.handleUserInput = this.handleUserInput.bind(this);
-    this.handleFormSubmit = this.handleFormSubmit.bind(this);
-    this.addNewAppointment = this.addNewAppointment.bind(this);
-    this.resetFormErrors = this.resetFormErrors.bind(this);
   }
 
   handleUserInput(value) {
@@ -36,14 +33,18 @@ export default class Appointments extends React.Component {
 
   validateForm() {
     console.log("YOYOYOY")
-    this.setState({formValid: this.state.ting_title.trim().length < 2})
+    console.log(this.state.ting_title.length > 3)
+    this.setState({formValid: this.state.ting_title.length > 3 &&
+                              moment(this.state.appt_data).isValid() &&
+                              moment(this.state.appt_data).isAfter()})
+    console.log(this.state.formValid)
   }
 
   resetFormErrors() {
     this.setState({formErrors: {}})
   }
 
-  handleFormSubmit() {
+  handleFormSubmit = () => {
     // this is the function which deals with submitting a new appointment to the
     // backend.
     var appointment = {title: this.state.ting_title,
