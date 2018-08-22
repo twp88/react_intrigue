@@ -12,6 +12,8 @@ export default class AppointmentForm extends React.Component {
     // component as a prop from the appointments component. In appointments this
     // function is known as handleUserInput
     this.props.onUserInput(e.target.value);
+    console.log("Slicker than your average");
+    console.log(e.target.value);
     // this changes the state in the appointments component, which is what
     // gets rendered after the form is submitted
   }
@@ -46,7 +48,7 @@ export default class AppointmentForm extends React.Component {
 
           <input name='ting_title' placeholder= 'Appointment'
           // input field
-            value={this.props.title}
+            value={this.props.title.value}
             // default value
             onChange={this.handleChange} />
             // function to handle change
@@ -54,7 +56,7 @@ export default class AppointmentForm extends React.Component {
           <Datetime input={false} open={true}
           // An element which is a 3rd party react component
             inputProps={inputProps}
-            value={moment(this.props.appt_data)}
+            value={moment(this.props.appt_data.value)}
             onChange={this.setAppTime}/>
 
           <input type='submit' value='Make Appointment'
