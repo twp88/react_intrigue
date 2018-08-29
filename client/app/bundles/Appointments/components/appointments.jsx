@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import AppointmentForm from './appointment_form'
 import Datetime from 'react-datetime'
 import update from 'immutability-helper'
+import PropTypes from 'prop-types'
 import moment from 'moment'
 import { AppointmentsList } from './appointments_list'
 import { FormErrors } from './FormErrors'
@@ -14,7 +15,7 @@ export default class Appointments extends React.Component {
     // in this component
     this.state = {
       appointments: this.props.appointments,
-      ting_title: {value: ''},
+      ting_title: '',
       appt_data: {value: ''},
       formErrors: {},
       formValid: false
@@ -108,6 +109,10 @@ export default class Appointments extends React.Component {
       </div>
    )
   }
+}
+
+Appointments.propTypes = {
+  ting_title: React.PropTypes.object
 }
 
 
