@@ -2,6 +2,7 @@ class AppointmentsController < ApplicationController
   def index
     @appointments = Appointment.order('appt_time ASC')
     @appointment = Appointment.new
+    render json: @appointments
   end
 
   def create
